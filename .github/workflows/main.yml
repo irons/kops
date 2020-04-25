@@ -32,16 +32,7 @@ jobs:
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go }}
-
-      - name: get env
         run: |
-          env
           go env
-
-      - name: make nodeup examples test
-        run: |
           make nodeup examples test
-
-      - name: make github-actions
-        run: |
           make github-actions
