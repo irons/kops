@@ -11,9 +11,10 @@ name: build
 
 env:
   GOPROXY: https://proxy.golang.org
+  GOPATH: /home/runner/work/kops/go
 
 jobs:
-  ci:
+  build:
     strategy:
       matrix:
         os: [ubuntu-18.04, macos-10.15]
@@ -24,12 +25,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          path: go/src/k8s.io/kops
 
-      - name: Setup go
+      - name: Set up go
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go }}
-      - run: |
+
+      - name: get env
+        run: |
           env
+          go env
+
+      - name: make nodeup examples test
+        run: |
           make nodeup examples test
+
+      - name: make github-actions
+        run: |
           make github-actions
