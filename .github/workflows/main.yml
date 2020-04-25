@@ -9,17 +9,17 @@ name: build
   pull_request:
     branches: ["*"]
 
+env:
+  GOPROXY: https://proxy.golang.org
+  GOPATH: ${{ github.workspace }}/go
+
 jobs:
   build:
     strategy:
       matrix:
         os: [ubuntu-18.04, macos-10.15]
         go: [1.13, 1.14]
-      fail-fast: false
-
-    env:
-      GOPROXY: https://proxy.golang.org
-      GOPATH: ${{ github.workspace }}/go
+      fail-fast: true
 
     runs-on: ${{ matrix.os }}
 
@@ -35,30 +35,29 @@ jobs:
         with:
           path: ${{ env.GOPATH }}/src/k8s.io/kops
 
-      - name: display env
-        run: |
-          env
-
-      - name: display go env
-        run: |
-          go env
-
-      - name: nodeup
+      - name: build and test
         working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
         run: |
-          make nodeup
+          make nodeup examples test
 
-      - name: examples
-        working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
-        run: |
-          make examples
+  verify:
+    strategy:
+      matrix:
+        os: [ubuntu-18.04]
+        go: [1.13, 1.14]
+      fail-fast: true
 
-      - name: test
-        working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
-        run: |
-          make test
+      - name: Set up go
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.go }}
+        id: go
 
-      - name: github-actions
+      - uses: actions/checkout@v2
+        with:
+          path: ${{ env.GOPATH }}/src/k8s.io/kops
+
+      - name: build and test
         working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
         run: |
           make github-actions
