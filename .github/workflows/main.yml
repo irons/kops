@@ -34,7 +34,7 @@ jobs:
         with:
           path: ${{ env.GOPATH }}/src/k8s.io/kops
 
-      - name: build and test
+      - name: make nodeup examples test
         working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
         run: |
           make nodeup examples test
@@ -59,7 +59,7 @@ jobs:
         with:
           path: ${{ env.GOPATH }}/src/k8s.io/kops
 
-      - name: build and test
+      - name: make github-actions
         working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
         run: |
           make github-actions
