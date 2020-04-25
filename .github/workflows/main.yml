@@ -9,10 +9,6 @@ name: build
   pull_request:
     branches: ["*"]
 
-env:
-  GOPROXY: https://proxy.golang.org
-  GOPATH: ~/work/kops/go
-
 jobs:
   build:
     strategy:
@@ -24,6 +20,11 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+
+      env:
+        GOPROXY: https://proxy.golang.org
+        GOPATH: ${{ env.HOME }}/work/kops/kops/go # actions seems to insist on this duplication
+
       - name: Set up go
         uses: actions/setup-go@v1
         with:
