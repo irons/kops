@@ -490,7 +490,7 @@ govet: ${BINDATA_TARGETS}
 
 # verify is ran by the pull-kops-verify prow job
 .PHONY: verify
-verify: travis-ci verify-gofmt
+verify: github-actions verify-gofmt
 
 .PHONY: verify-boilerplate
 verify-boilerplate:
@@ -553,12 +553,12 @@ verify-bindata:
 ci: govet verify-gofmt verify-generate verify-gomod verify-goimports verify-boilerplate verify-bazel verify-misspelling verify-shellcheck verify-staticcheck verify-terraform verify-bindata nodeup examples test | verify-gendocs verify-packages verify-apimachinery
 	echo "Done!"
 
-# travis-ci is the target that travis-ci calls
+# github-actions is the target that github's actions call
 # we skip tasks that rely on bazel and are covered by other jobs
 # verify-gofmt: uses bazel, covered by pull-kops-verify
 # govet needs to be after verify-goimports because it generates bindata.go
-.PHONY: travis-ci
-travis-ci: verify-generate verify-gomod verify-goimports govet verify-boilerplate verify-bazel verify-misspelling verify-shellcheck verify-bindata | verify-gendocs verify-packages verify-apimachinery
+.PHONY: github-actions
+github-actions: verify-generate verify-gomod verify-goimports govet verify-boilerplate verify-bazel verify-misspelling verify-shellcheck verify-bindata | verify-gendocs verify-packages verify-apimachinery
 	echo "Done!"
 
 .PHONY: pr
