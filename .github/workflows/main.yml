@@ -21,9 +21,9 @@ jobs:
 
     steps:
 
-      env:
-        GOPROXY: https://proxy.golang.org
-        GOPATH: ${{ env.HOME }}/work/kops/kops/go # actions seems to insist on this duplication
+      - env:
+          GOPROXY: https://proxy.golang.org
+          GOPATH: ${{ env.HOME }}/work/kops/kops/go  # actions seems to insist on this duplication
 
       - name: Set up go
         uses: actions/setup-go@v1
