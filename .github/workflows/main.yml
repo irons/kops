@@ -31,16 +31,20 @@ jobs:
           go-version: ${{ matrix.go }}
         id: go
 
-      - name: display env
-        run: |
-          go env
-
       - uses: actions/checkout@v2
         with:
           path: ${{ env.GOPATH }}/src/kops.io/kops
 
+      - name: display env
+        run: |
+          env
+
+      - name: display go env
+        run: |
+          go env
+
       - name: build and test
-        working-directory: ${{ env.GOPATH }}
+        working-directory: ${{ env.GOPATH }}/src/kops.io/kops
         run: |
           make nodeup examples test
           make github-actions
