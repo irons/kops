@@ -30,6 +30,10 @@ jobs:
           go-version: ${{ matrix.go }}
         id: go
 
+      - name: display env
+        run: |
+          env
+
       - uses: actions/checkout@v2
         with:
           path: ${{ go.module-path }}
@@ -37,6 +41,5 @@ jobs:
       - name: build and test
         working-directory: ${{ go.module-path }}
         run: |
-          env
           make nodeup examples test
           make github-actions
