@@ -2,7 +2,7 @@
 
 # kops - Kubernetes Operations
 
-[![Build Status](https://github.com/irons/kops/workflows/ci/badge.svg?branch=add-github-actions)](https://github.com/irons/kops/actions/) [![Go Report Card](https://goreportcard.com/badge/k8s.io/kops)](https://goreportcard.com/report/k8s.io/kops)  [![GoDoc Widget]][GoDoc]
+[![Build Status](https://github.com/irons/kops/workflows/build/badge.svg?branch=add-github-actions)](https://github.com/irons/kops/actions/) [![Go Report Card](https://goreportcard.com/badge/k8s.io/kops)](https://goreportcard.com/report/k8s.io/kops)  [![GoDoc Widget]][GoDoc]
 
 [GoDoc]: https://pkg.go.dev/k8s.io/kops
 [GoDoc Widget]: https://godoc.org/k8s.io/kops?status.svg

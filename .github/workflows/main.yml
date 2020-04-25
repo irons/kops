@@ -1,5 +1,5 @@
 ---
-name: CI checks
+name: build
 
 'on':
   push:
