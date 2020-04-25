@@ -34,5 +34,6 @@ jobs:
           go-version: ${{ matrix.go }}
       - run: |
           env
+          cd $GOPATH
           make nodeup examples test
           make github-actions
