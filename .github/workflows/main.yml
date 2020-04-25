@@ -1,0 +1,33 @@
+---
+name: CI tests
+
+'on':
+  push:
+    branches:
+      - master
+      - add-github-actions
+  pull_request:
+    branches: ["*"]
+
+env:
+  GOPROXY: https://proxy.golang.org
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, macos-10.15]
+        go: [1.13, 1.14]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup go
+        uses: actions/setup-go@v1
+        with:
+          go-version: ${{ matrix.go }}
+      - run: |
+          make nodeup examples test
+          make travis-ci
