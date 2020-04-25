@@ -43,8 +43,22 @@ jobs:
         run: |
           go env
 
-      - name: build and test
+      - name: nodeup
         working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
         run: |
-          make nodeup examples test
+          make nodeup
+
+      - name: examples
+        working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
+        run: |
+          make examples
+
+      - name: test
+        working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
+        run: |
+          make test
+
+      - name: github-actions
+        working-directory: ${{ env.GOPATH }}/src/k8s.io/kops
+        run: |
           make github-actions
