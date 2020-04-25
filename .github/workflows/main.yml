@@ -17,13 +17,13 @@ jobs:
         go: [1.13, 1.14]
       fail-fast: false
 
+    env:
+      GOPROXY: https://proxy.golang.org
+      GOPATH: ${{ env.HOME }}/work/kops/kops/go  # actions seems to insist on this duplication
+
     runs-on: ${{ matrix.os }}
 
     steps:
-
-      - env:
-          GOPROXY: https://proxy.golang.org
-          GOPATH: ${{ env.HOME }}/work/kops/kops/go  # actions seems to insist on this duplication
 
       - name: Set up go
         uses: actions/setup-go@v1
