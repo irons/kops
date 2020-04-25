@@ -31,7 +31,8 @@ jobs:
         id: go
 
       - uses: actions/checkout@v2
-        path: ${{ go.module-path }}
+        with:
+          path: ${{ go.module-path }}
 
       - name: build and test
         working-directory: ${{ go.module-path }}
