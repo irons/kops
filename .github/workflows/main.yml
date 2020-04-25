@@ -26,14 +26,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: go/src/k8s.io/kops
+          path: ${{ go.module-path }}
 
       - name: Set up go
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go }}
-      - run: |
+
+      - name: build and test
+        working-directory: ${{ go.module-path }}
+        run: |
           env
-          cd $GOPATH
           make nodeup examples test
           make github-actions
