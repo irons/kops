@@ -11,7 +11,7 @@ name: build
 
 env:
   GOPROXY: https://proxy.golang.org
-  GOPATH: ${{ env.HOME }}/work/kops/go
+  GOPATH: ~/work/kops/go
 
 jobs:
   build:
@@ -36,10 +36,10 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          path: ${{ env.HOME }}/work/kops/kops/go
+          path: ~/work/kops/kops/go
 
       - name: build and test
-        working-directory: ${{ env.HOME }}/work/kops/kops/go
+        working-directory: ~/work/kops/kops/go
         run: |
           make nodeup examples test
           make github-actions
