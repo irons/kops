@@ -32,14 +32,14 @@ jobs:
 
       - name: display env
         run: |
-          env
+          go env
 
       - uses: actions/checkout@v2
         with:
-          path: /home/runner/work/kops/go
+          path: /home/runner/work/kops/kops/go
 
       - name: build and test
-        working-directory: /home/runner/work/kops/go
+        working-directory: /home/runner/work/kops/kops/go
         run: |
           make nodeup examples test
           make github-actions
