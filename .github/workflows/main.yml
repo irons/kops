@@ -36,10 +36,10 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          path: ${{ go.module-path }}
+          path: /home/runner/work/kops/go
 
       - name: build and test
-        working-directory: ${{ go.module-path }}
+        working-directory: /home/runner/work/kops/go
         run: |
           make nodeup examples test
           make github-actions
