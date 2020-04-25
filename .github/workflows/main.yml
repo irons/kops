@@ -24,14 +24,14 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v2
-        with:
-          path: ${{ go.module-path }}
-
       - name: Set up go
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go }}
+
+      - uses: actions/checkout@v2
+        with:
+          path: ${{ go.module-path }}
 
       - name: build and test
         working-directory: ${{ go.module-path }}
