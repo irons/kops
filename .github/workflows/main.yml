@@ -5,6 +5,7 @@ name: build
   push:
     branches:
       - master
+      - github-actions-ci-testing
   pull_request:
     branches: ["*"]
 
